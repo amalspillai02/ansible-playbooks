@@ -1,5 +1,5 @@
 - name: using conditional statements
-  hosts: all
+  hosts: ubuntu
   vars:
     package: apache2
   tasks:
@@ -10,6 +10,7 @@
     when:
       - ansible_distribution == 'Ubuntu'
       - ansible_os_family == 'Debian'
+      - ansible_user == 'amal'
   - name: Enabling and starting
     service:
       name: "{{package}}"
