@@ -1,0 +1,20 @@
+- name: using conditional statements
+  hosts: all
+  vars:
+    package: apache2
+  tasks:
+  - name: install apache2 in ubuntu machines
+    apt:
+      name: "{{package}}"
+      state: present
+    when:
+      - ansible_distribution == 'Ubuntu'
+      - ansible_os_family == 'Debian'
+  - name: Enabling and starting
+    service:
+      name: "{{package}}"
+      enabled: yes
+      state: started
+    when:
+      - ansible_distribution == 'Ubuntu'
+      - ansible_os_family == 'Debian'
